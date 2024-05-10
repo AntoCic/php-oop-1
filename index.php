@@ -1,10 +1,17 @@
 <?php
-require __DIR__ . '/models/production.php';
+require __DIR__ . '/models/movie.php';
+require __DIR__ . '/models/tv_serie.php';
 
-$avatar = new Production('Avatar', 'inglese', 8);
-$endgame = new Production('Avengers: Endgame', 'inglese', 9);
-$il_risveglio_della_forza = new Production('Star Wars: Il risveglio della Forza', 'inglese', 10);
-$maverick = new Production('Top Gun: Maverick', 'inglese', 9);
+$avatar = new Movie('Avatar', 'inglese', 8, '19397843', '2:50');
+$endgame = new Movie('Avengers: Endgame', 'inglese', 9, '89343909', '2:35');
+$il_risveglio_della_forza = new Movie('Star Wars: Il risveglio della Forza', 'inglese', 10, '65324656', '2:25');
+$maverick = new Movie('Top Gun: Maverick', 'inglese', 9, '652347865', '1:50');
+$the_100 = new TVSerie('The 100', 'inglese', 10, 7);
+$the_witcher = new TVSerie('The Witcher', 'inglese', 9, 3);
+
+$movies = [$avatar, $endgame, $il_risveglio_della_forza, $maverick];
+$tv_series = [$the_100, $the_witcher];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,39 +24,33 @@ $maverick = new Production('Top Gun: Maverick', 'inglese', 9);
 </head>
 
 <body>
-    <?php var_dump($avatar) ?>
-    <br>
-    <?php var_dump($endgame) ?>
-    <br>
-    <?php var_dump($il_risveglio_della_forza) ?>
-    <br>
-    <?php var_dump($maverick) ?>
-    <br>
     <div class="container">
         <div class="row g-3">
-            <div class="col">
-                <h2><?= $avatar->title ?></h2>
-                <p>lingua: <?= $avatar->linguage ?></p>
-                <p>voto: <?= $avatar->vote ?></p>
-            </div>
-            <div class="col">
-                <h2><?= $endgame->title ?></h2>
-                <p>lingua: <?= $endgame->linguage ?></p>
-                <p>voto: <?= $endgame->vote ?></p>
-            </div>
-            <div class="col">
-                <h2><?= $il_risveglio_della_forza->title ?></h2>
-                <p>lingua: <?= $il_risveglio_della_forza->linguage ?></p>
-                <p>voto: <?= $il_risveglio_della_forza->vote ?></p>
-            </div>
-            <div class="col">
-                <h2><?= $maverick->title ?></h2>
-                <p>lingua: <?= $maverick->linguage ?></p>
-                <p>voto: <?= $maverick->vote ?></p>
-            </div>
+
+            <?php foreach ($movies as $movie) { ?>
+                <div class="col">
+                    <h2><?= $movie->title; ?></h2>
+                    <p>lingua: <?= $movie->linguage; ?></p>
+                    <p>voto: <?= $movie->vote; ?></p>
+                    <p>profitti: $<?= $movie->profitti; ?></p>
+                    <p>durata: <?= $movie->durata; ?></p>
+                </div>
+            <?php } ?>
+
+        </div>
+        <div class="row g-3">
+
+            <?php foreach ($tv_series as $tv_serie) { ?>
+                <div class="col">
+                    <h2><?= $tv_serie->title; ?></h2>
+                    <p>lingua: <?= $tv_serie->linguage; ?></p>
+                    <p>voto: <?= $tv_serie->vote; ?></p>
+                    <p>stagioni: <?= $tv_serie->seasons; ?></p>
+                </div>
+            <?php } ?>
+
         </div>
     </div>
-
 </body>
 
 </html>
